@@ -33,7 +33,11 @@ Citizen.CreateThread(function()
                     Citizen.Wait(150)
                     if IsPedInAnyVehicle(ped, false) and IsControlPressed(2, 75) and not IsEntityDead(ped) then
                         SetVehicleEngineOn(veh, true, true, false)
-                        TaskLeaveVehicle(ped, veh, 0)
+ 	                if keepDoorOpen then
+    	                    TaskLeaveVehicle(ped, veh, 256)
+    	                else
+	                    TaskLeaveVehicle(ped, veh, 0)
+	                end
                     end
                 end
             end
