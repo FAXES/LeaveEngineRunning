@@ -5,6 +5,7 @@
 --- Config ---
 RestrictEmer = false -- Only allow this feature for emergency vehicles.
 keepDoorOpen = true -- Keep the door open when getting out.
+highBeams = true
 
 --- Code ---
 local notify = false
@@ -33,6 +34,11 @@ Citizen.CreateThread(function()
                     Citizen.Wait(150)
                     if IsPedInAnyVehicle(ped, false) and IsControlPressed(2, 75) and not IsEntityDead(ped) then
                         SetVehicleEngineOn(veh, true, true, false)
+			if highBeams then
+			    SetVehicleLights(veh, 2) -- Force turn light on
+			    SetVehicleFullbeam(veh, true) 
+			    SetVehicleLightMultiplier(veh, 1.0)
+			end
                         if keepDoorOpen then
                             TaskLeaveVehicle(ped, veh, 256)
                         else
@@ -46,6 +52,11 @@ Citizen.CreateThread(function()
                 Citizen.Wait(150)
                 if IsPedInAnyVehicle(ped, false) and IsControlPressed(2, 75) and not IsEntityDead(ped) then
                     SetVehicleEngineOn(veh, true, true, false)
+		    if highBeams then
+			SetVehicleLights(veh, 2) -- Force turn light on
+			SetVehicleFullbeam(veh, true) 
+			SetVehicleLightMultiplier(veh, 1.0)
+		    end
                     if keepDoorOpen then
                         TaskLeaveVehicle(ped, veh, 256)
                     else
